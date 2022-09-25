@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\organization.props" />
+  <Import Project="..\..\product_version.props" />
+  <Import Project="..\..\participants.props" />
+  <Import Project="..\nuget.props" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Core\AdditionOperationPC.cs" />
+    <Compile Remove="Core\ArrayModificationPC.cs" />
+    <Compile Remove="Core\DivisionOperationPC.cs" />
+    <Compile Remove="Core\EnumeratingPC.cs" />
+    <Compile Remove="Core\MemberAccessPC.cs" />
+    <Compile Remove="Core\MultiplicationOperationPC.cs" />
+    <Compile Remove="Core\RaisingEventPC.cs" />
+    <Compile Remove="Core\SubstractionOperationPC.cs" />
+  </ItemGroup>
+
+</Project>
