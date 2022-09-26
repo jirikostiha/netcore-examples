@@ -29,13 +29,19 @@ namespace collect
         [Benchmark]
         public void AddToList()
         {
-            _list.Add(Obj);
+            for (int i = 0; i < N - 1; i++)
+            {
+                _list.Add(Obj);
+            }
         }
 
         [Benchmark]
         public void AddToInitializedList()
         {
-            _listInit.Add(Obj);
+            for (int i = 0; i < N - 1; i++)
+            {
+                _listInit.Add(Obj);
+            }
         }
 
         [Benchmark]
