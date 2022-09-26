@@ -5,7 +5,7 @@ namespace collect
     [MemoryDiagnoser]
     public class AddingToCollections
     {
-        [Params(100, 1000, 10_000)]
+        [Params(100, 100_000)]
         public int N;
 
         private List<object> _list;
@@ -14,16 +14,13 @@ namespace collect
 
         private object Obj = new object();
 
-        public AddingToCollections()
-        {
-        }
 
         [IterationSetup]
         public void IterationSetup()
         {
             _list = new List<object>();
-            _listInit = new List<object>(N);
-            _array = new object[N];
+            _listInit = new List<object>(N + 1);
+            _array = new object[N + 1];
         }
 
         [Benchmark]
