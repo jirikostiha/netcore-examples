@@ -5,12 +5,23 @@ VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution Items", "solution Items", "{8ABEA7BE-2CB6-499A-A09E-7D836F189422}"
 	ProjectSection(SolutionItems) = preProject
-		..\readme.md = ..\readme.md
+		..\.gitattributes = ..\.gitattributes
+		..\.gitignore = ..\.gitignore
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreExamples", "NetCoreExamples\NetCoreExamples.csproj", "{CB65C99E-0D60-4AE6-A869-3A5ABAFF00E4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreExamples.System", "System\NetCoreExamples.System.csproj", "{A82C3799-54ED-4B6E-918A-9560A492DEB2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{5A03C650-8D67-408E-8554-BCD9759AFBEE}"
+	ProjectSection(SolutionItems) = preProject
+		..\readme.md = ..\readme.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ci", "ci", "{82A51A21-C53B-484E-99DC-034BDDE4B3E0}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\build.yml = ..\.github\workflows\build.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
