@@ -1,1 +1,3 @@
-# net core examples and benchmarks
+# Net Core Examples
+
+Examples and benchmarks.
