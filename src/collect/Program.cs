@@ -6,7 +6,11 @@ namespace collect
     {
         public static void Main(string[] args)
         {
-            var addToCollectionsSummary = BenchmarkRunner.Run<AddingToCollections>();
+            //var addToCollectionsSummary = BenchmarkRunner.Run<AddingToCollections>();
+
+            var summary = BenchmarkRunner.Run<MemberAccess>();
+
+            //var summary = BenchmarkRunner.Run<AppendingToList>();
 
             Console.ReadKey();
         }
