@@ -8,7 +8,7 @@ namespace collect
         [Params(100, 100_000)]
         public int N;
 
-        private List<int>? _list;
+        private List<int> _list;
 
         [IterationSetup]
         public void IterationSetup()
