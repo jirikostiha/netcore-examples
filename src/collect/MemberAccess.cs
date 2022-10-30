@@ -8,22 +8,19 @@ namespace collect
         [Params(100, 100_000)]
         public int N;
 
-        private SomeClass _someClass;
-        private SomeClassWithPrivateOptions _someClassWithPrivateOptions;
-        private SomeClassWithPublicOptions _someClassWithPublicOptions;
+        private SomeClass _someClass = new SomeClass() { IntNum = 1 };
+        private SomeClassWithPrivateOptions _someClassWithPrivateOptions = new SomeClassWithPrivateOptions(
+            new SomeOptions() { IntNum = 1 } );
+        private SomeClassWithPublicOptions _someClassWithPublicOptions = new SomeClassWithPublicOptions()
+            { Options = new SomeOptions() };
 
-        [IterationSetup]
-        public void IterationSetup()
-        {
-            _someClass = new SomeClass() { IntNum = 1 };
-            _someClassWithPrivateOptions = new SomeClassWithPrivateOptions(
-                new SomeOptions { IntNum = 1 });
-            _someClassWithPublicOptions = new SomeClassWithPublicOptions()
-            { Options = new SomeOptions() { IntNum = 1 } };
-        }
 
         [Benchmark]
         public int AccessIntProperty()
+            => _someClass.IntNum;
+
+        [Benchmark]
+        public int AccessIntPropertyLoop()
         {
             var sum = 0;
             for (int i = 0; i < N - 1; i++)
@@ -36,6 +33,10 @@ namespace collect
 
         [Benchmark]
         public int AccessIntPropertyViaPrivateOptions()
+            => _someClassWithPrivateOptions.IntNum;
+
+        [Benchmark]
+        public int AccessIntPropertyViaPrivateOptionsLoop()
         {
             var sum = 0;
             for (int i = 0; i < N - 1; i++)
@@ -48,6 +49,10 @@ namespace collect
 
         [Benchmark]
         public int AccessIntPropertyViaPublicOptions()
+            => _someClassWithPublicOptions.IntNum;
+
+        [Benchmark]
+        public int AccessIntPropertyViaPublicOptionsLoop()
         {
             var sum = 0;
             for (int i = 0; i < N - 1; i++)
