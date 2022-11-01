@@ -10,90 +10,91 @@ namespace collect
         [Params(100, 100_000)]
         public int N;
 
-        private SomeClass _someClass = new () { IntNum = 1 };
-        private SomeClassWithPrivateOptions _someClassWithPrivateOptions = new (
-            new SomeOptions() { IntNum = 1 } );
-        private SomeClassWithPublicOptions _someClassWithPublicOptions = new ()
-            { Options = new SomeOptions() };
+        private long _intField;
+
+        public long IntAutoProperty { get; private set; }
+        
+        private ClassWithIntAutoProperty _classFieldWithIntAutoProperty = new();
+
+        private ClassWithFieldClass _classFieldWithFieldClass = new();
+
+        private ClassWithAutoPropertyClass _classFieldWithAutoPropertyClass = new();
 
 
         [Benchmark]
-        public int AccessIntProperty()
-            => _someClass.IntNum;
-
-        //[Benchmark]
-        //public int AccessIntPropertyLoop()
-        //{
-        //    var sum = 0;
-        //    for (int i = 0; i < N - 1; i++)
-        //    {
-        //        sum += _someClass.IntNum;
-        //    }
-
-        //    return sum;
-        //}
-
-        [Benchmark]
-        public int AccessIntPropertyViaPrivateOptions()
-            => _someClassWithPrivateOptions.IntNum;
-
-        //[Benchmark]
-        //public int AccessIntPropertyViaPrivateOptionsLoop()
-        //{
-        //    var sum = 0;
-        //    for (int i = 0; i < N - 1; i++)
-        //    {
-        //        sum += _someClassWithPrivateOptions.IntNum;
-        //    }
-
-        //    return sum;
-        //}
-
-        [Benchmark]
-        public int AccessIntPropertyViaPublicOptions()
-            => _someClassWithPublicOptions.IntNum;
-
-        //[Benchmark]
-        //public int AccessIntPropertyViaPublicOptionsLoop()
-        //{
-        //    var sum = 0;
-        //    for (int i = 0; i < N - 1; i++)
-        //    {
-        //        sum += _someClassWithPublicOptions.IntNum;
-        //    }
-
-        //    return sum;
-        //}
-    }
-
-    class SomeClass
-    {
-        public int IntNum { get; set; }
-    }
-
-    class SomeClassWithPrivateOptions
-    {
-        private readonly SomeOptions _options;
-
-        public SomeClassWithPrivateOptions(SomeOptions options)
+        public long AccessField()
         {
-            _options = options;
+            for (long i = 0; i < N; i++)
+                _intField += i;
+
+            return _intField;
         }
 
-        public int IntNum => _options.IntNum;
+        [Benchmark]
+        public long AccessAutoProperty()
+        {
+            for (long i = 0; i < N; i++)
+                IntAutoProperty += i;
+
+            return IntAutoProperty;
+        }
+
+        [Benchmark]
+        public long AccessClassFieldWithIntAutoProperty()
+        {
+            for (long i = 0; i < N; i++)
+                _classFieldWithIntAutoProperty.IntNum += i;
+
+            return _classFieldWithIntAutoProperty.IntNum;
+        }
+
+        [Benchmark]
+        public long AccessClassFieldWithFieldClass()
+        {
+            for (long i = 0; i < N; i++)
+                _classFieldWithFieldClass.IntNum += i;
+
+            return _classFieldWithFieldClass.IntNum;
+        }
+
+        [Benchmark]
+        public long AccessClassFieldWithAutoPropertyClass()
+        {
+            for (long i = 0; i < N; i++)
+                _classFieldWithAutoPropertyClass.Options.IntNum += i;
+
+            return _classFieldWithAutoPropertyClass.Options.IntNum;
+        }
     }
 
-    class SomeClassWithPublicOptions
+    class ClassWithIntAutoProperty
     {
-        public SomeOptions Options { get; init; }
-
-        public int IntNum => Options.IntNum;
+        public long IntNum { get; set; }
     }
 
-    record SomeOptions
+    class ClassWithFieldClass
     {
-        public int IntNum { get; set; }
+        private readonly RecordWithIntNumbers _options;
 
-        public int IntNumField;
+        public ClassWithFieldClass(RecordWithIntNumbers? options = null)
+        {
+            _options = options ?? new RecordWithIntNumbers();
+        }
+
+        public long IntNum { get => _options.IntNum; set => _options.IntNum = value; }
+    }
+
+    class ClassWithAutoPropertyClass
+    {
+        public RecordWithIntNumbers Options { get; init; } = new();
+
+        public long IntNum => Options.IntNum;
+    }
+
+    record RecordWithIntNumbers
+    {
+        public long IntNum { get; set; }
+
+        public long IntNumField;
     }
 }

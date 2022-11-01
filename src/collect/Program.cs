@@ -8,7 +8,9 @@ namespace collect
         {
             //var addToCollectionsSummary = BenchmarkRunner.Run<AddingToCollections>();
 
-            var summary = BenchmarkRunner.Run<MemberAccess>();
+            //var summary = BenchmarkRunner.Run<MemberAccess>();
+
+            var summary = BenchmarkRunner.Run<MathOperations>();
 
             //var summary = BenchmarkRunner.Run<AppendingToList>();
 
