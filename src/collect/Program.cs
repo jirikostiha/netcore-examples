@@ -10,7 +10,9 @@ namespace collect
 
             //var summary = BenchmarkRunner.Run<MemberAccess>();
 
-            var summary = BenchmarkRunner.Run<MathOperations>();
+            //var summary = BenchmarkRunner.Run<MathOperations>();
+
+            var summary = BenchmarkRunner.Run<CollectionConversions>();
 
             //var summary = BenchmarkRunner.Run<AppendingToList>();
 
