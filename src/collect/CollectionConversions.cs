@@ -5,28 +5,42 @@ namespace collect
     [MemoryDiagnoser]
     public class CollectionConversions
     {
-        [Params(100, 10_000)]
+        [Params(1000, 100_000)]
         public int N;
 
-        private List<int> _list;
+        private List<long> _list;
+        private long[] _array;
 
 
         [IterationSetup]
         public void IterationSetup()
         {
-            _list = new List<int>(Enumerable.Range(0, N-1));
+            _list = new List<long>(Enumerable.Range(0, N-1).Select(x => (long)x));
+            _array = _list.ToArray();
         }
 
         [Benchmark]
-        public int[] ListToArray()
+        public long[] ListToArray()
         {
             return _list.ToArray();
         }
 
         [Benchmark]
-        public List<int> ListToList()
+        public List<long> ListToList()
         {
             return _list.ToList();
+        }
+
+        [Benchmark]
+        public List<long> ArrayToList()
+        {
+            return _array.ToList();
+        }
+
+        [Benchmark]
+        public long[] ArrayToArray()
+        {
+            return _array.ToArray();
         }
     }
 }
